@@ -20,18 +20,28 @@ RSpec.describe 'Flights index page' do
       @passenger_5 = Passenger.create(name: 'Hannah')
       @passenger_6 = Passenger.create(name: 'Sean')
 
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_1, passenger: @passenger_1)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_1, passenger: @passenger_2)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_2, passenger: @passenger_3)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_2, passenger: @passenger_4)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_3, passenger: @passenger_5)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_3, passenger: @passenger_6)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_4, passenger: @passenger_1)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_4, passenger: @passenger_2)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_5, passenger: @passenger_3)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_5, passenger: @passenger_4)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_6, passenger: @passenger_5)
-      flight_passenger_1 = FlightPassengers.create(flight: @flight_6, passenger: @passenger_6)
+      @flight_passenger_1 = @flight_1.flight_passengers.create(passenger: @passenger_1)
+      @flight_passenger_1 = @flight_1.flight_passengers.create(passenger: @passenger_2)
+      @flight_passenger_1 = @flight_2.flight_passengers.create(passenger: @passenger_3)
+      @flight_passenger_1 = @flight_2.flight_passengers.create(passenger: @passenger_4)
+      @flight_passenger_1 = @flight_3.flight_passengers.create(passenger: @passenger_5)
+      @flight_passenger_1 = @flight_3.flight_passengers.create(passenger: @passenger_6)
+      @flight_passenger_1 = @flight_4.flight_passengers.create(passenger: @passenger_1)
+      @flight_passenger_1 = @flight_4.flight_passengers.create(passenger: @passenger_2)
+      @flight_passenger_1 = @flight_5.flight_passengers.create(passenger: @passenger_3)
+      @flight_passenger_1 = @flight_5.flight_passengers.create(passenger: @passenger_4)
+      @flight_passenger_1 = @flight_6.flight_passengers.create(passenger: @passenger_5)
+      @flight_passenger_1 = @flight_6.flight_passengers.create(passenger: @passenger_6)
+    end
+
+    describe "When I visit the flights index page" do
+      it "I see a list of all flight numbers" do
+        visit '/flights'
+
+        Flight.all.each do |flight|
+          expect(page).to have_content(flight.id)
+        end
+      end
 
     end
   end
