@@ -67,6 +67,25 @@ RSpec.describe 'Flights index page' do
             end
           end
         end
+
+        describe "When a click a link to remove a passenger" do
+          describe "I am returned to the flights index page" do
+            it "And I no longer see that passenger listed under that flight" do
+              visit '/flights'
+
+              within "#flight-#{@flight_1.id}" do
+                first(:link, 'Remove From Flight').click
+              end
+
+              expect(current_path).to eq('/flights')
+
+              save_and_open_page
+              within "#flight-#{@flight_1.id}" do
+                expect(page).not_to have_content("#{@passenger_1.name}")
+              end
+            end
+          end
+        end
       end
     end
   end
