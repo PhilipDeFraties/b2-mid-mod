@@ -1,0 +1,8 @@
+<h1> <%= @airline.name %> </h1>
+
+<section id='passenger-names'>
+  <h2> Unique Passengers: </h2>
+  <% @airline.uniq_passengers.each do |passenger| %>
+    <%= passenger.name %><br>
+  <% end %>
+</section>
