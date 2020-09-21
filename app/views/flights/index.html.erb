@@ -4,7 +4,7 @@
   Origin:<%= flight.origin %><br>
   Destination:<%= flight.destination %><br>
   Passengers: <% flight.passengers.each do |passenger| %>
-                <%= passenger.name %>, 
+                <%= passenger.name %> <%= link_to 'Remove From Flight', "/flight_passengers/#{passenger.id}", method: :delete %>, 
                 <% end %>
 </section>
 <% end %>

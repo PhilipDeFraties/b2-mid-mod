@@ -55,6 +55,19 @@ RSpec.describe 'Flights index page' do
         end
       end
 
+      describe "Next to each passengers name" do
+        it "I see a link to remove that passenger from that flight" do
+          visit '/flights'
+
+          Flight.all.each do |flight|
+            within "#flight-#{flight.id}" do
+              flight.passengers.each do |passenger|
+                expect(page).to have_link('Remove From Flight')
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
